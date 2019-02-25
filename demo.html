@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var obj = {
+        a: 1,
+        b: 2,
+        [Symbol.iterator](){
+            var index = 0;
+            var value = null
+            var _this = this
+            return {
+                next(){
+                    value = obj[Object.keys(_this)[index]];
+                    if(!value){
+                        return {value: undefined,done: true}
+                    }
+                    index++;
+                    return {value: value,done: false};
+                }
+            }
+        }
+    };
+
+    for(var value of obj){
+        console.info(value)
+    }
+</script>
+</body>
+</html>
